@@ -21,12 +21,12 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000  // Default React development port
+    port: 3000
   },
   root: path.resolve(__dirname, "client"),
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
-    emptyOutDir: true,
+    outDir: path.resolve(__dirname, "dist"),
+    emptyOutDir: true
   },
-  assetsInclude: ["**/*.gltf", "**/*.glb", "**/*.mp3", "**/*.ogg", "**/*.wav"],
+  assetsInclude: ["**/*.gltf", "**/*.glb", "**/*.mp3", "**/*.ogg", "**/*.wav"]
 });
