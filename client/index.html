@@ -44,6 +44,21 @@
         background: rgba(255, 255, 255, 0.5);
       }
     </style>
+    <script>
+      // Prevent inspect element and refresh page
+      document.addEventListener('keydown', function(e) {
+        // Detect Ctrl+Shift+I or F12
+        if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+          e.preventDefault();
+          location.reload();
+        }
+      });
+
+      // Prevent right-click context menu
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
