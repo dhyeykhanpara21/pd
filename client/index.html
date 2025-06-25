@@ -47,8 +47,21 @@
     <script>
       // Prevent inspect element and refresh page
       document.addEventListener('keydown', function(e) {
-        // Detect Ctrl+Shift+I or F12
-        if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
+        // Detect various developer tool shortcuts
+        if (
+          // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+          // F12
+          e.key === 'F12' ||
+          // Ctrl+Shift+K (Firefox)
+          (e.ctrlKey && e.shiftKey && e.key === 'K') ||
+          // Command+Option+I (Mac)
+          (e.metaKey && e.altKey && e.key === 'i') ||
+          // Command+Option+J (Mac)
+          (e.metaKey && e.altKey && e.key === 'j') ||
+          // Command+Option+C (Mac)
+          (e.metaKey && e.altKey && e.key === 'c')
+        ) {
           e.preventDefault();
           location.reload();
         }
@@ -58,6 +71,25 @@
       document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
       });
+
+      // Additional protection against developer tools
+      setInterval(function() {
+        // Check if dev tools are open
+        const devtools = /./;
+        devtools.toString = function() {
+          location.reload();
+          return '';
+        }
+        console.log('%c', devtools);
+      }, 1000);
+
+      // Disable source view
+      document.onkeydown = function(e) {
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+          e.preventDefault();
+          return false;
+        }
+      };
     </script>
   </head>
   <body>
