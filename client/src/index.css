@@ -173,3 +173,56 @@ html {
 * {
   cursor: none !important;
 }
+
+/* Responsive base styles */
+@layer base {
+  html {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    html {
+      font-size: 12px;
+    }
+  }
+}
+
+/* Responsive utilities */
+@layer utilities {
+  .container-padding {
+    @apply px-4 sm:px-6 md:px-8;
+  }
+  
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+  
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+}
+
+/* Enhanced mobile experience */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better spacing for mobile */
+  .section-padding {
+    padding: 3rem 1rem;
+  }
+}

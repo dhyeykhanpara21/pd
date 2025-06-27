@@ -22,7 +22,11 @@ export default function Navigation() {
 
     // Close mobile menu when clicking outside
     const handleClickOutside = (e: MouseEvent) => {
-      if (isMobileMenuOpen && !(e.target as Element).closest('.mobile-menu')) {
+      const target = e.target as Element;
+      const mobileMenuButton = target.closest('button');
+      const mobileMenu = target.closest('.mobile-menu');
+      
+      if (isMobileMenuOpen && !mobileMenu && !mobileMenuButton) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -40,10 +44,10 @@ export default function Navigation() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled ? 'bg-black/80 backdrop-blur-sm border-b border-purple-500/20' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">  {/* Adjusted padding */}
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="text-xl font-bold">
+          <div className="text-lg sm:text-xl font-bold">  {/* Responsive text size */}
             <Link 
               to="/"
               className="nebula-text hover:opacity-80 transition-opacity"
@@ -106,13 +110,13 @@ export default function Navigation() {
         <div className={`md:hidden fixed inset-0 z-40 transition-all duration-300 mobile-menu ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}>
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
-          <div className="relative z-50 h-full flex flex-col justify-center items-center space-y-8">
+          <div className="absolute inset-0 bg-black/95 backdrop-blur-md"></div>  {/* Enhanced blur */}
+          <div className="relative z-50 h-full flex flex-col justify-center items-center space-y-6 sm:space-y-8 p-4">  {/* Adjusted spacing */}
             {navigationItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-2xl uppercase tracking-wider transition-colors duration-300 flex items-center space-x-3 ${
+                className={`text-xl sm:text-2xl uppercase tracking-wider transition-colors duration-300 flex items-center space-x-3 ${  /* Responsive text */
                   location.pathname === item.path 
                     ? 'text-white' 
                     : 'text-gray-400 hover:text-white'
