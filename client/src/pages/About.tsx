@@ -85,7 +85,7 @@ export default function About() {
               </p>
               
               <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed">
-              Over the past 1+ years, I’ve worked on a variety of impactful projects—from building an inventory management system for Anganwadi centers (Suchi Tracker), to developing eCommerce platforms (NixKart) and blogging systems (Luphonix Blog). I enjoy integrating technologies like MongoDB, WebGL, and Firebase to create responsive UIs and seamless backend systems
+              Over the past 1+ years, I’ve worked on a variety of impactful projects—from building an inventory management system for Anganwadi centers (Suchi Tracker), to developing eCommerce platforms (NixKart). I enjoy integrating technologies like MongoDB, WebGL, and Firebase to create responsive UIs and seamless backend systems
               </p>
 
               <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed">

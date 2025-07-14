@@ -13,17 +13,17 @@ const projects = [
     color: "var(--mercury-color)",
     link: "https://github.com/dhyeykhanpara21/Suchi_Tracker2"
   },
-  {
-    id: 2,
-    title: "Luphonix Prime",
-    planet: "Venus",
-    description: "Personal portfolio website highlighting full-stack projects, tech stack, GitHub integration, and smooth user interface using Django.",
-    year: "2024",
-    tech: ["HTML", "CSS", "JavaScript", "Django"],
-    status: "Live",
-    color: "var(--venus-color)",
-    link: "https://github.com/Luphonix-Prime/Luphonix"
-  },
+  // {
+  //   id: 2,
+  //   title: "Luphonix Prime",
+  //   planet: "Venus",
+  //   description: "Personal portfolio website highlighting full-stack projects, tech stack, GitHub integration, and smooth user interface using Django.",
+  //   year: "2024",
+  //   tech: ["HTML", "CSS", "JavaScript", "Django"],
+  //   status: "Live",
+  //   color: "var(--venus-color)",
+  //   link: "https://github.com/Luphonix-Prime/Luphonix"
+  // },
   {
     id: 3,
     title: "NixKart",

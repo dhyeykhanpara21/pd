@@ -13,17 +13,17 @@ const repositories = [
     status: "Live",
     link: "https://github.com/dhyeykhanpara21/Suchi_Tracker2"
   },
-  {
-    id: 2,
-    name: "Luphonix Prime",
-    description: "Personal portfolio and project showcase website highlighting advanced web development work with clean UI and responsive design.",
-    language: "HTML / CSS / JavaScript / Django",
-    stars: 80,
-    forks: 18,
-    color: "var(--venus-color)",
-    status: "Live",
-    link: "https://github.com/Luphonix-Prime/Luphonix"
-  },
+  // {
+  //   id: 2,
+  //   name: "Luphonix Prime",
+  //   description: "Personal portfolio and project showcase website highlighting advanced web development work with clean UI and responsive design.",
+  //   language: "HTML / CSS / JavaScript / Django",
+  //   stars: 80,
+  //   forks: 18,
+  //   color: "var(--venus-color)",
+  //   status: "Live",
+  //   link: "https://github.com/Luphonix-Prime/Luphonix"
+  // },
   {
     id: 3,
     name: "NixKart",
