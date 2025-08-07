@@ -97,6 +97,14 @@ export default function About() {
               <button 
                 className="cosmic-gradient text-white px-8 py-3 rounded-full hover:scale-105 transition-all duration-300 font-medium tracking-wider uppercase text-sm"
                 data-cursor="pointer"
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/resume.pdf';
+                  link.download = 'Dhyey_Khanpara_Resume.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
               >
                 Download Mission Log
               </button>

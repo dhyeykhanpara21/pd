@@ -2,9 +2,11 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import * as THREE from "three";
+import { usePortfolio } from "../lib/stores/usePortfolio";
 
 export default function Scene() {
   const location = useLocation();
+  const { selectedPlanet } = usePortfolio();
 
   // Solar system planets data
   const planets = useMemo(() => [
@@ -92,47 +94,69 @@ export default function Scene() {
     }
   ], []);
 
-  // Camera animation based on current route
+  // Camera animation based on current route and selected planet
   useFrame((state) => {
     const camera = state.camera;
     const time = state.clock.elapsedTime;
     
-    // Route-based camera positioning
+    // Default route-based camera positioning
     let targetPosition = [0, 0, 15];
     let lookAtTarget = [0, 0, 0];
     
-    switch (location.pathname) {
-      case '/':
-        targetPosition = [0, 2, 15];
-        lookAtTarget = [0, 0, 0];
-        break;
-      case '/projects':
-        targetPosition = [10, 3, 12];
-        lookAtTarget = [8, 0, 0]; // Earth
-        break;
-      case '/about':
-        targetPosition = [-8, 4, 10];
-        lookAtTarget = [6, 0, 0]; // Venus
-        break;
-      case '/github':
-        targetPosition = [16, 6, 14];
-        lookAtTarget = [14, 0, 0]; // Jupiter
-        break;
-      case '/contact':
-        targetPosition = [20, 8, 16];
-        lookAtTarget = [18, 0, 0]; // Saturn
-        break;
+    // Planet-specific camera positioning
+    if (selectedPlanet && location.pathname === '/projects') {
+      const planetData = planets.find(p => p.name === selectedPlanet);
+      if (planetData) {
+        // Calculate current planet position based on orbital motion
+        const angle = time * planetData.orbitSpeed;
+        const planetX = Math.cos(angle) * planetData.orbitRadius;
+        const planetZ = Math.sin(angle) * planetData.orbitRadius;
+        
+        // Position camera to focus on the selected planet
+        const distance = planetData.size * 8 + 5; // Adjust distance based on planet size
+        targetPosition = [
+          planetX + distance * Math.cos(angle + Math.PI / 4),
+          planetData.size * 2 + 3,
+          planetZ + distance * Math.sin(angle + Math.PI / 4)
+        ];
+        lookAtTarget = [planetX, 0, planetZ];
+      }
+    } else {
+      // Default route-based positioning when no planet is selected
+      switch (location.pathname) {
+        case '/':
+          targetPosition = [0, 2, 15];
+          lookAtTarget = [0, 0, 0];
+          break;
+        case '/projects':
+          targetPosition = [10, 3, 12];
+          lookAtTarget = [8, 0, 0]; // Earth
+          break;
+        case '/about':
+          targetPosition = [-8, 4, 10];
+          lookAtTarget = [6, 0, 0]; // Venus
+          break;
+        case '/github':
+          targetPosition = [16, 6, 14];
+          lookAtTarget = [14, 0, 0]; // Jupiter
+          break;
+        case '/contact':
+          targetPosition = [20, 8, 16];
+          lookAtTarget = [18, 0, 0]; // Saturn
+          break;
+      }
     }
 
     // Smooth camera interpolation
-    camera.position.x += (targetPosition[0] - camera.position.x) * 0.02;
-    camera.position.y += (targetPosition[1] - camera.position.y) * 0.02;
-    camera.position.z += (targetPosition[2] - camera.position.z) * 0.02;
+    const lerpFactor = selectedPlanet ? 0.03 : 0.02; // Slightly faster when targeting a planet
+    camera.position.x += (targetPosition[0] - camera.position.x) * lerpFactor;
+    camera.position.y += (targetPosition[1] - camera.position.y) * lerpFactor;
+    camera.position.z += (targetPosition[2] - camera.position.z) * lerpFactor;
 
     // Dynamic look-at with slight movement
     camera.lookAt(
-      lookAtTarget[0] + Math.sin(time * 0.3) * 0.5,
-      lookAtTarget[1] + Math.cos(time * 0.2) * 0.3,
+      lookAtTarget[0] + Math.sin(time * 0.3) * (selectedPlanet ? 0.2 : 0.5),
+      lookAtTarget[1] + Math.cos(time * 0.2) * (selectedPlanet ? 0.1 : 0.3),
       lookAtTarget[2]
     );
   });

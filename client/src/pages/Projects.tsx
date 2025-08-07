@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { usePortfolio } from "../lib/stores/usePortfolio";
 
 const projects = [
   {
@@ -74,6 +75,7 @@ const projects = [
 export default function Projects() {
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { setSelectedPlanet: setGlobalSelectedPlanet } = usePortfolio();
 
   // Add this new effect to handle planet filtering animations
   useEffect(() => {
@@ -139,7 +141,10 @@ export default function Projects() {
         <div className="flex justify-center mb-16">
           <div className="bg-black/30 backdrop-blur-sm rounded-full p-2 border border-purple-500/30">
             <button
-              onClick={() => setSelectedPlanet(null)}
+              onClick={() => {
+                setSelectedPlanet(null);
+                setGlobalSelectedPlanet(null);
+              }}
               className={`px-6 py-2 rounded-full transition-all duration-300 ${
                 !selectedPlanet 
                   ? 'cosmic-gradient text-white' 
@@ -152,7 +157,10 @@ export default function Projects() {
             {Array.from(new Set(projects.map(p => p.planet))).map(planet => (
               <button
                 key={planet}
-                onClick={() => setSelectedPlanet(planet)}
+                onClick={() => {
+                  setSelectedPlanet(planet);
+                  setGlobalSelectedPlanet(planet);
+                }}
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
                   selectedPlanet === planet 
                     ? 'cosmic-gradient text-white' 

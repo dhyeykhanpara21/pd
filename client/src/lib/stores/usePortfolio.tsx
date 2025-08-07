@@ -5,12 +5,14 @@ interface PortfolioState {
   scrollProgress: number;
   cameraTarget: { x: number; y: number; z: number };
   currentSection: string;
+  selectedPlanet: string | null;
   isLoading: boolean;
   
   // Actions
   setScrollProgress: (progress: number) => void;
   setCameraTarget: (target: { x: number; y: number; z: number }) => void;
   setCurrentSection: (section: string) => void;
+  setSelectedPlanet: (planet: string | null) => void;
   setLoading: (loading: boolean) => void;
 }
 
@@ -19,11 +21,13 @@ export const usePortfolio = create<PortfolioState>()(
     scrollProgress: 0,
     cameraTarget: { x: 0, y: 0, z: 0 },
     currentSection: 'home',
+    selectedPlanet: null,
     isLoading: true,
     
     setScrollProgress: (progress) => set({ scrollProgress: progress }),
     setCameraTarget: (target) => set({ cameraTarget: target }),
     setCurrentSection: (section) => set({ currentSection: section }),
+    setSelectedPlanet: (planet) => set({ selectedPlanet: planet }),
     setLoading: (loading) => set({ isLoading: loading }),
   }))
 );
