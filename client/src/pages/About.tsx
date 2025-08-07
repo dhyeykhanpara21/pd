@@ -6,7 +6,7 @@ const skills = [
   { name: "React & Next.js", planet: "Venus", color: "var(--venus-color)" },
   { name: "Three.js & WebGL", planet: "Earth", color: "var(--earth-color)" },
   { name: "Node.js & Python", planet: "Mars", color: "var(--mars-color)" },
-  { name: "UI/UX Design", planet: "Jupiter", color: "var(--jupiter-color)" },
+  { name: "Django & Flask", planet: "Jupiter", color: "var(--jupiter-color)" },
   { name: "3D Graphics", planet: "Saturn", color: "var(--saturn-color)" }
 ];
 
